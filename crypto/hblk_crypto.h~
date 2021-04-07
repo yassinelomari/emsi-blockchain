@@ -1,0 +1,8 @@
+#ifndef HEADER_FILE
+#define HEADER_FILE
+/**
+ *This function calculate the hash of *s and return it
+*/
+uint8_t *sha256(int8_t const *s, size_t len, uint8_t digest
+[SHA256_DIGEST_LENGTH]);
+#endif

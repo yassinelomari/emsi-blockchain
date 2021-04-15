@@ -1,5 +1,8 @@
 #ifndef HEADER_SHA256
 #define HEADER_SHA256
+#include <stdint.h>
+#include <openssl/sha.h>
+
 /**
  * sha256 - function calculate the hash of a data
  * @s: the data which we want to calculate the hash value

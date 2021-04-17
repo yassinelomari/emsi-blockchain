@@ -2,14 +2,16 @@
 
 EC_KEY *ec_create(void)
 {
-	const char * curve_name = "secp521r1";
-	int  nid;
-	EC_KEY * mykey;
+	EC_KEY *mykey;
 
-	nid = OBJ_txt2nid(curve_name);
-	
-	mykey = malloc(sizeof(EC_KEY));
-	mykey = EC_KEY_new_by_curve_name(nid);
-	
-	return mykey;
+	mykey = malloc(sizeof(mykey));
+	mykey = EC_KEY_new_by_curve_name(NID_secp256k1);
+	if (mykey == NULL)
+		return (NULL);
+	if (!EC_KEY_generate_key(mykey)){
+		EC_KEY_free(mykey);
+		return (NULL);
+	}
+	return (mykey);
 }
+

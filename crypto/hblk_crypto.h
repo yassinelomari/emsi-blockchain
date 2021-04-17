@@ -2,6 +2,8 @@
 #define HEADER_SHA256
 #include <stdint.h>
 #include <openssl/sha.h>
+#include <openssl/ec.h>
+#include <openssl/objects.h>
 
 /**
  * sha256 - function calculate the hash of a data
@@ -12,5 +14,7 @@
 */
 uint8_t *sha256(int8_t const *s, size_t len, uint8_t digest
 [SHA256_DIGEST_LENGTH]);
+
+EC_KEY *ec_create(void);
 #endif
 

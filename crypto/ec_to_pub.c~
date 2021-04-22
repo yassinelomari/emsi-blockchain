@@ -5,7 +5,7 @@ uint8_t *ec_to_pub(EC_KEY const *key, uint8_t pub[EC_PUB_LEN])
 	const EC_POINT *my_point;
 	const EC_GROUP *my_grp;
 
-	if (key == NULL)
+	if (key == NULL || pub == NULL)
 		return (NULL);
 	my_point = malloc(sizeof(my_point));
 	my_point = EC_KEY_get0_public_key(key);

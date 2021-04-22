@@ -1,11 +1,16 @@
 #ifndef HEADER_SHA256
 #define HEADER_SHA256
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <stdint.h>
-#include <openssl/sha.h>
-#include <openssl/ec.h>
-#include <openssl/objects.h>
-#include <openssl/pem.h>
 #include <sys/stat.h>
+#include <openssl/opensslconf.h>
+#include <openssl/ec.h>
+#include <openssl/ecdsa.h>
+#include <openssl/obj_mac.h>
+#include <openssl/pem.h>
+#include <openssl/sha.h>
 
 #define EC_PUB_LEN 65
 

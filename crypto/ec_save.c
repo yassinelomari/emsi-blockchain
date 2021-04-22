@@ -1,5 +1,10 @@
 #include "hblk_crypto.h"
-
+/**
+ * ec_save - function save public key and privite key in file
+ * @key: the EC_KEY contaning the public and privite key
+ * @folder: the path where key's files are saved
+ * Return: 1 or 0 upon success or failure
+*/
 int ec_save(EC_KEY *key, char const *folder)
 {
 	char my_file[512] = {0};

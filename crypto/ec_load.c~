@@ -1,5 +1,9 @@
 #include "hblk_crypto.h"
-
+/**
+ * ec_load - function load public key and privite key from file
+ * @folder: the path where files are saved
+ * Return: the EC_KEY contaning the public key and privite key
+*/
 EC_KEY *ec_load(char const *folder)
 {
 	EC_KEY *mykey = NULL;

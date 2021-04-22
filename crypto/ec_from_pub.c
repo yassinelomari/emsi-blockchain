@@ -6,7 +6,7 @@
 */
 EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN])
 {
-	EC_KEY * my_key;
+	EC_KEY *my_key;
 	EC_POINT *my_point;
 	EC_GROUP *my_grp;
 
@@ -18,7 +18,7 @@ EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN])
 		return (NULL);
 	my_grp = malloc(sizeof(my_grp));
 	my_grp = EC_GROUP_new_by_curve_name(NID_secp256k1);
-	if (my_grp == NULL) 
+	if (my_grp == NULL)
 		return (NULL);
 	my_point = EC_POINT_new(my_grp);
 	if (my_point == NULL)
@@ -27,6 +27,5 @@ EC_KEY *ec_from_pub(uint8_t const pub[EC_PUB_LEN])
 		return (NULL);
 	if (!EC_KEY_set_public_key(my_key, my_point))
 		return (NULL);
-	return my_key;
-	
+	return (my_key);
 }

@@ -17,7 +17,18 @@
 
 #define PRI_FILENAME	"key.pem"
 #define PUB_FILENAME	"key_pub.pem"
+#define SIG_MAX_LEN	72
 
+/**
+ * struct sig_s - Signature structure
+ * @sig: Signature, his max length is SIG_MAX_LEN
+ * @len: Actual signature length
+ */
+typedef struct sig_s
+{
+	uint8_t     sig[SIG_MAX_LEN];
+	uint8_t     len;
+} sig_t;
 /**
  * sha256 - function calculate the hash of a data
  * @s: the data which we want to calculate the hash value
@@ -58,5 +69,23 @@ int ec_save(EC_KEY *key, char const *folder);
  * Return: the EC_KEY contaning the public key and privite key
 */
 EC_KEY *ec_load(char const *folder);
+/**
+ * ec_sign - function signs a given set of bytes
+ * @key: the EC_KEY contaning the public and privite key
+ * @msg: characters to be signed
+ * @msglen: length of @msg
+ * @sig: the structure of signature
+ * Return: A pointor to the signature
+*/
+uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg, size_t msglen, sig_t *sig);
+/**
+ * ec_sign - function signs a given set of bytes
+ * @key: the EC_KEY contaning the public and privite key
+ * @msg: characters to be verified
+ * @msglen: length of @msg
+ * @sig: the structure of signature to be checked
+ * Return: 1 if the signature is valid, and 0 otherwise
+*/
+int ec_verify(EC_KEY const *key, uint8_t const *msg, size_t msglen, sig_t const *sig);
 #endif
 

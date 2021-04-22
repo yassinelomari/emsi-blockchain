@@ -12,6 +12,7 @@
 #include <openssl/pem.h>
 #include <openssl/sha.h>
 
+#define EC_CURVE	NID_secp256k1
 #define EC_PUB_LEN 65
 
 #define PRIVATE_FILE "key.pem"

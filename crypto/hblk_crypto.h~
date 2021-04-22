@@ -77,7 +77,8 @@ EC_KEY *ec_load(char const *folder);
  * @sig: the structure of signature
  * Return: A pointor to the signature
 */
-uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg, size_t msglen, sig_t *sig);
+uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg, size_t msglen,
+		 sig_t *sig);
 /**
  * ec_sign - function signs a given set of bytes
  * @key: the EC_KEY contaning the public and privite key
@@ -86,6 +87,7 @@ uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg, size_t msglen, sig_t *si
  * @sig: the structure of signature to be checked
  * Return: 1 if the signature is valid, and 0 otherwise
 */
-int ec_verify(EC_KEY const *key, uint8_t const *msg, size_t msglen, sig_t const *sig);
+int ec_verify(EC_KEY const *key, uint8_t const *msg, size_t msglen,
+		 sig_t const *sig);
 #endif
 

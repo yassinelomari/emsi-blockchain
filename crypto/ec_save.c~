@@ -7,17 +7,12 @@
 */
 int ec_save(EC_KEY *key, char const *folder)
 {
-	char my_file[512] = {0};
+	char my_file[BUFSIZ];
 	FILE *file;
-	struct stat st = {0};
 
 	if (!key || !folder)
 		return (0);
-	if (stat(folder, &st) == -1)
-	{
-		if (mkdir(folder, 0700) == -1)
-			return (0);
-	}
+	mkdir(folder, 0700);
 	sprintf(my_file, "%s/%s", folder, PRIVATE_FILE);
 	file = fopen(my_file, "w");
 	if (!file)

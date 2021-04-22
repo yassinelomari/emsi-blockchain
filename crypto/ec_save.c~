@@ -13,7 +13,7 @@ int ec_save(EC_KEY *key, char const *folder)
 	if (!key || !folder)
 		return (0);
 	mkdir(folder, 0700);
-	sprintf(my_file, "%s/%s", folder, PRIVATE_FILE);
+	sprintf(my_file, "%s/%s", folder, PRI_FILENAME);
 	pfile = fopen(my_file, "w");
 	if (!pfile)
 		return (0);
@@ -23,7 +23,7 @@ int ec_save(EC_KEY *key, char const *folder)
 		return (0);
 	}
 	fclose(pfile);
-	sprintf(my_file, "%s/%s", folder, PUBLIC_FILE);
+	sprintf(my_file, "%s/%s", folder, PUB_FILENAME);
 	pfile = fopen(my_file, "w");
 	if (!pfile)
 		return (0);

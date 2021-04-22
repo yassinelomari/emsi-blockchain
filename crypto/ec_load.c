@@ -15,14 +15,14 @@ EC_KEY *ec_load(char const *folder)
 		return (NULL);
 	if (stat(folder, &st) == -1)
 		return (NULL);
-	sprintf(myfile, "./%s/%s", folder, PUBLIC_FILE);
+	sprintf(myfile, "./%s/%s", folder, PUB_FILENAME);
 	pfile = fopen(myfile, "r");
 	if (!pfile)
 		return (NULL);
 	if (!PEM_read_EC_PUBKEY(pfile, &mykey, NULL, NULL))
 		return (NULL);
 	fclose(pfile);
-	sprintf(myfile, "./%s/%s", folder, PRIVATE_FILE);
+	sprintf(myfile, "./%s/%s", folder, PRI_FILENAME);
 	pfile = fopen(myfile, "r");
 	if (!pfile)
 		return (NULL);

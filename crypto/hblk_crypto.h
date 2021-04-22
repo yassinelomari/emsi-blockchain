@@ -15,8 +15,8 @@
 #define EC_CURVE	NID_secp256k1
 #define EC_PUB_LEN 65
 
-#define PRIVATE_FILE "key.pem"
-#define PUBLIC_FILE "key_pub.pem"
+#define PRI_FILENAME	"key.pem"
+#define PUB_FILENAME	"key_pub.pem"
 
 /**
  * sha256 - function calculate the hash of a data

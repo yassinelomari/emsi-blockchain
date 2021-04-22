@@ -11,19 +11,14 @@
 uint8_t *ec_sign(EC_KEY const *key, uint8_t const *msg, size_t msglen,
 	sig_t *sig)
 {
-	uint8_t buffer[SHA256_DIGEST_LENGTH];
+	uint32_t length = 0;
 
-	if (key == NULL || msg == NULL || sig == NULL)
+	if (!key || !msg || !msglen)
 		return (NULL);
-
-	sig->len = (uint8_t)ECDSA_size(key);
-
-	if (!SHA256(msg, msglen, buffer))
+	memset(sig->sig, 0, sizeof(sig->sig));
+	if (!ECDSA_sign(0, msg, (int)msglen, sig->sig, &length, (EC_KEY *)key))
 		return (NULL);
-
-	if (!ECDSA_sign(EC_CURVE, buffer, SHA256_DIGEST_LENGTH, sig->sig,
-		 (unsigned int *)&(sig->len), (EC_KEY *)key))
-		return (NULL);
-
+	sig->len = (uint8_t)length;
 	return (sig->sig);
 }
+

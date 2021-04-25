@@ -1,7 +1,13 @@
 #include "blockchain.h"
 
+/**
+ * blockchain_create - function create a new blockchain
+ *
+ * Return: this function return the created blockchain
+ *
+*/
 blockchain_t *blockchain_create(void)
-{	
+{
 	blockchain_t *blk_ch;
 	block_t *blk_genesis;
 

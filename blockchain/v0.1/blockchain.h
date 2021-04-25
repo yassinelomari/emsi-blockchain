@@ -99,11 +99,12 @@ void block_destroy(block_t *block);
  */
 void blockchain_destroy(blockchain_t *blockchain);
 /**
- * block_hash - function compute the block hash 
+ * block_hash - function compute the block hash
  *
  * @block: the bloch to be hashed
  * @hash_buf: the hash of the block
  * Return: the hash of the block
  */
-uint8_t *block_hash(block_t const *block, uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
+uint8_t *block_hash(block_t const *block,
+		uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
 #endif

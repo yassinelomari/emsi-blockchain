@@ -2,7 +2,7 @@
 /**
  * blockchain_deserialize - deserializes blockchain from file
  * @path: path to file
- * Return: pointer to blockchain 
+ * Return: pointer to blockchain
  */
 blockchain_t *blockchain_deserialize(char const *path)
 {

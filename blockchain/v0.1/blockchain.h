@@ -11,12 +11,14 @@
 #include <unistd.h>
 #include "provided/endianness.h"
 
+
 #define GNS_DATA "Holberton School"
 #define GNS_DATA_LEN 16
 #define GNS_HASH "\xc5\x2c\x26\xc8\xb5\x46\x16\x39\x63\x5d\x8e\xdf\x2a\x97\xd4\x8d\x0c\x8e\x00\x09\xc8\x17\xf2\xb1\xd3\xd7\xff\x2f\x04\x51\x58\x03"
 #define GNS_TIMESTAMP 1537578000
 #define HBLK_MAGIC "HBLK"
 #define HBLK_VERSION "0.1"
+#define CHECK_ENDIAN(x) (endianness ? SWAPENDIAN(x) : (void)0)
 
 /**
  * struct blockchain_s - Blockchain structure
@@ -120,4 +122,18 @@ uint8_t *block_hash(block_t const *block,
  * Return: 0 upon success, -1 upon failure
  */
 int blockchain_serialize(blockchain_t const *blockchain, char const *path);
+/**
+ * blockchain_deserialize - deserializes blockchain from file
+ * @path: path to file
+ * Return: pointer to blockchain 
+ */
+blockchain_t *blockchain_deserialize(char const *path);
+/**
+ * deserialize_blocks - deserializes blocks from the file
+ * @file: open file to save file
+ * @size: number of blocks in the file
+ * @endianness: if endianess needs switching
+ * Return: pointer to list of blocks or NULL
+ */
+llist_t *deserialize_blocks(int file, uint32_t size, uint8_t endianness);
 #endif

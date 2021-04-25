@@ -85,4 +85,10 @@ blockchain_t *blockchain_create(void);
  * Return: the created block
  */
 block_t *block_create(block_t const *prev, int8_t const *data, uint32_t data_len);
+/**
+ * block_destroy - function destroy a block 
+ *
+ * @block: pointer to the block to be destroied
+ */
+void block_destroy(block_t *block);
 #endif

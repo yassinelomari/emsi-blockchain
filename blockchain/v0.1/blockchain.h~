@@ -76,4 +76,19 @@ typedef struct block_s
  *
 */
 blockchain_t *blockchain_create(void);
+/**
+ * block_create - function create a new block and initializes it
+ *
+ * @prev: pointet to the previous block in the chain
+ * @data: the data to be stored in the block
+ * @data_len: the length of data
+ * Return: the created block
+ */
+block_t *block_create(block_t const *prev, int8_t const *data, uint32_t data_len);
+/**
+ * block_destroy - function destroy a block 
+ *
+ * @block: pointer to the block to be destroied
+ */
+void block_destroy(block_t *block);
 #endif

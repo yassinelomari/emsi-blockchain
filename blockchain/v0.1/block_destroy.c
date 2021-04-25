@@ -1,7 +1,7 @@
 #include "blockchain.h"
 
 /**
- * block_destroy - function destroy a block 
+ * block_destroy - function destroy a block
  *
  * @block: pointer to the block to be destroied
  */

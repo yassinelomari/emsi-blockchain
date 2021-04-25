@@ -6,6 +6,7 @@
 #include <llist.h>
 #include <stdint.h>
 #include <openssl/sha.h>
+#include <time.h>
 
 #define GNS_DATA "Holberton School"
 #define GNS_DATA_LEN 16
@@ -75,4 +76,13 @@ typedef struct block_s
  *
 */
 blockchain_t *blockchain_create(void);
+/**
+ * block_create - function create a new block and initializes it
+ *
+ * @prev: pointet to the previous block in the chain
+ * @data: the data to be stored in the block
+ * @data_len: the length of data
+ * Return: the created block
+ */
+block_t *block_create(block_t const *prev, int8_t const *data, uint32_t data_len);
 #endif

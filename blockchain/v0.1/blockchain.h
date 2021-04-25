@@ -92,4 +92,10 @@ block_t *block_create(block_t const *prev, int8_t const *data,
  * @block: pointer to the block to be destroied
  */
 void block_destroy(block_t *block);
+/**
+ * blockchain_destroy - function destroy a blockchain
+ *
+ * @blockchain: pointet to the blockchain to be destroied
+ */
+void blockchain_destroy(blockchain_t *blockchain);
 #endif

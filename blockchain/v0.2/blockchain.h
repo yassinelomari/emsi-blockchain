@@ -34,6 +34,8 @@
 	"\xc5\x2c\x26\xc8\xb5\x46\x16\x39\x63\x5d\x8e\xdf\x2a\x97\xd4\x8d" \
 	"\x0c\x8e\x00\x09\xc8\x17\xf2\xb1\xd3\xd7\xff\x2f\x04\x51\x58\x03" \
 }
+#define DIFFICULTY_ADJUSTMENT_INTERVAL	5
+#define BLOCK_GENERATION_INTERVAL	1
 
 /**
  * struct blockchain_s - Blockchain structure
@@ -176,4 +178,12 @@ int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
  * Void
  */
 void block_mine(block_t *block);
+/**
+ * blockchain_difficulty - compute difficulty of the next block in a blockchain
+ *
+ * @blockchain: pointer to the blockchain to analyze
+ *
+ * Return: difficulty to be assigned to the next block in @blockchain
+ */
+uint32_t blockchain_difficulty(blockchain_t const *blockchain);
 #endif

@@ -1,26 +1,40 @@
 #include "blockchain.h"
+/**
+ * compute_difficulty - count the number of leading zero-bits in a hash
+ *
+ * @hash: hash buffer
+ *
+ * Return: computed difficulty of hash
+ */
+static uint32_t compute_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH])
+{
+	const uint8_t *ptr = hash;
+	uint32_t difficulty = 0;
+	int i = 0;
+
+	while (ptr < hash + SHA256_DIGEST_LENGTH)
+	{
+		for (i = 7; i >= 0; i -= 1)
+		{
+			if ((*ptr >> i) & 1)
+				return (difficulty);
+			difficulty += 1;
+		}
+		ptr += 1;
+	}
+	return (difficulty);
+}
 
 /**
- * hash_matches_difficulty - checks whether a given hash matches
- *                           a given difficulty
- * @hash: hash to check
- * @difficulty: minimum difficulty the hash should match
- * Return: 1 if difficulty is respected or 0 otherwise
+ * hash_matches_difficulty - check if a given hash matches a given difficulty
+ *
+ * @hash: pointer to the hash to check
+ * @difficulty: minimum difficulty the hash must match
+ *
+ * Return: If @difficulty is matched, return 1. Otherwise, return 0.
  */
-int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
-	uint32_t difficulty)
+int hash_matches_difficulty(
+	uint8_t const hash[SHA256_DIGEST_LENGTH], uint32_t difficulty)
 {
-	uint8_t i = 0, msb = difficulty & 7;
-
-	difficulty -= difficulty & 7;
-	difficulty /= 8;
-
-	while (i < difficulty)
-		if (hash[i++] & 1)
-			return (0);
-
-	if (hash[difficulty] >> (8 - msb))
-		return (0);
-
-	return (1);
+	return (hash ? compute_difficulty(hash) >= difficulty : 0);
 }

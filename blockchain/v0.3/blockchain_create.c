@@ -1,46 +1,39 @@
 #include "blockchain.h"
 
+#define GENESIS_TIMESTAMP 1537578000
+#define GENESIS_DATA "Holberton School"
+#define GENESIS_DATA_LEN 16
+#define GENESIS_HASH "\xc5\x2c\x26\xc8\xb5\x46\x16\x39\x63\x5d\x8e\xdf\x2a\x97\xd4\x8d\x0c\x8e\x00\x09\xc8\x17\xf2\xb1\xd3\xd7\xff\x2f\x04\x51\x58\x03"
+
 /**
- * blockchain_create - function create a new blockchain
- *
- * Return: this function return the created blockchain
- *
-*/
+ * blockchain_create - creates a genesis blockchain
+ * Return: pointer to new blockchain or NULL on error
+ */
 blockchain_t *blockchain_create(void)
 {
-	blockchain_t *blk_ch;
-	block_t *blk_genesis;
+	blockchain_t *chain = calloc(1, sizeof(*chain));
+	block_t *block = calloc(1, sizeof(*block));
+	llist_t *list = llist_create(MT_SUPPORT_TRUE);
+	llist_t *unspent = llist_create(MT_SUPPORT_TRUE);
 
-	blk_ch = calloc(1, sizeof(*blk_ch));
-	if (blk_ch == NULL)
-		return (NULL);
-	blk_genesis = calloc(1, sizeof(*blk_genesis));
-	if (blk_genesis == NULL)
+	if (!chain || !block || !list || !unspent)
 	{
-		free(blk_ch);
+		free(chain), free(block), llist_destroy(list, 1, NULL);
+		llist_destroy(unspent, 1, NULL);
 		return (NULL);
 	}
-	blk_ch->chain = llist_create(MT_SUPPORT_TRUE);
-	if (blk_ch->chain == NULL)
+
+	block->info.timestamp = GENESIS_TIMESTAMP;
+	memcpy(&(block->data.buffer), GENESIS_DATA, GENESIS_DATA_LEN);
+	block->data.len = GENESIS_DATA_LEN;
+	memcpy(&(block->hash), GENESIS_HASH, SHA256_DIGEST_LENGTH);
+
+	if (llist_add_node(list, block, ADD_NODE_FRONT))
 	{
-		free(blk_ch);
-		free(blk_genesis);
+		free(chain), free(block), llist_destroy(list, 1, NULL);
 		return (NULL);
 	}
-	blk_genesis->info.index = 0;
-	blk_genesis->info.difficulty = 0;
-	blk_genesis->info.timestamp = GNS_TIMESTAMP;
-	blk_genesis->info.nonce = 0;
-	memset(blk_genesis->info.prev_hash, 0, SHA256_DIGEST_LENGTH);
-	memcpy(&(blk_genesis->data.buffer), GNS_DATA, GNS_DATA_LEN);
-	blk_genesis->data.len = GNS_DATA_LEN;
-	memcpy(&(blk_genesis->hash), GNS_HASH, SHA256_DIGEST_LENGTH);
-	if (llist_add_node(blk_ch->chain, blk_genesis, ADD_NODE_FRONT) == -1)
-	{
-		free(blk_genesis);
-		llist_destroy(blk_ch->chain, 0, NULL);
-		free(blk_ch);
-		return (NULL);
-	}
-	return (blk_ch);
+	chain->chain = list;
+	chain->unspent = unspent;
+	return (chain);
 }

@@ -4,6 +4,7 @@
  * blockchain_serialize - serializes blockchain to file
  * @blockchain: pointer to blockchain to serialize
  * @path: path to save file
+ *
  * Return: 0 on success else -1 on failure
  */
 int blockchain_serialize(blockchain_t const *blockchain, char const *path)
